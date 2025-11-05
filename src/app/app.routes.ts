@@ -7,14 +7,17 @@ import { OffersComponent } from './components/offers/offers.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TestsComponent } from './components/tests/tests.component';
 import { routes as routePaths } from './constants/routes';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
 export const routes: Routes = [
   { path: routePaths.home, component: HomeComponent },
+    { path:routePaths.searchresults, component: SearchResultsComponent },
   { path: routePaths.tests, component: TestsComponent },
   { path: routePaths.labs, component: LabsComponent },
   { path: 'labs/:id', component: LabDetailsComponent },  // ✅ use param here
   { path: routePaths.offers, component: OffersComponent },
   { path: routePaths.profile, component: ProfileComponent },
   { path: routePaths.checkout, component: CheckoutComponent },
+ 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];

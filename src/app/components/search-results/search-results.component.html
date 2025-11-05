@@ -1,0 +1,44 @@
+<div class="max-w-6xl mx-auto p-6">
+  <h2 class="text-3xl font-bold text-primary mb-6">
+    Search Results for "{{query}}" in {{city}}
+  </h2>
+
+  <div *ngIf="loading" class="flex justify-center py-20">
+    <mat-spinner diameter="60"></mat-spinner>
+  </div>
+
+  <div *ngIf="!loading" class="space-y-6">
+    <!-- Fake Lab Cards -->
+    <mat-card class="shadow-lg hover:shadow-xl transition">
+      <mat-card-header>
+        <mat-card-title>City Diagnostics</mat-card-title>
+        <mat-card-subtitle>⭐ 4.7 • NABL Accredited</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Blood Test</strong> • ₹450 • Ready in 2 hrs</p>
+        <p class="text-gray-600 mt-2">Marine Drive, Mumbai</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary">View Details</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="shadow-lg hover:shadow-xl transition">
+      <mat-card-header>
+        <mat-card-title>HealthPlus Labs</mat-card-title>
+        <mat-card-subtitle>⭐ 4.5 • ISO Certified</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Blood Test</strong> • ₹400 • Ready in 3 hrs</p>
+        <p class="text-gray-600 mt-2">Andheri East, Mumbai</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary">View Details</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <div class="text-center py-10 text-gray-500">
+      <p>More results coming soon when backend is ready...</p>
+    </div>
+  </div>
+</div>

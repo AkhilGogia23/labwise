@@ -1,4 +1,14 @@
 .hero {
-@apply animate-[fadeIn_0.5s_ease-in-out];
+  @apply relative;
+}
 
+.hero::before {
+  content: '';
+  @apply absolute inset-0 bg-black/20;
+  z-index: 1;
+}
+
+/* Dark mode overlay adjustment */
+.dark .hero::before {
+  @apply bg-black/40;
 }

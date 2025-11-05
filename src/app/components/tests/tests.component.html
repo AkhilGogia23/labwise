@@ -1,52 +1,77 @@
-<div class="p-4 flex flex-col md:flex-row">
-  <div class="w-full md:w-1/2">
-    <h2 class="text-2xl">Compare Labs for {{testQuery}} in {{city}}</h2>
-    <div class="filters mt-4">
-      <mat-slider min="0" max="10000" step="100" [(ngModel)]="priceFilter" (change)="applyFilters()"></mat-slider> Max Price: {{priceFilter}}
-      <mat-slider min="0" max="5" step="0.5" [(ngModel)]="ratingFilter" (change)="applyFilters()"></mat-slider> Min Rating: {{ratingFilter}}
-      <mat-form-field>
-        <mat-label>Accreditation</mat-label>
-        <mat-select [(ngModel)]="accreditationFilter" (selectionChange)="applyFilters()">
-          <mat-option *ngFor="let acc of accreditations" [value]="acc">{{acc || 'Any'}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+  <div class="max-w-7xl mx-auto px-6">
+    <h1 class="text-3xl font-bold text-primary dark:text-white mb-6">
+      Labs for "{{testQuery}}" in {{city}}
+    </h1>
+
+    <!-- Filters -->
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-8">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div>
+          <label class="block text-sm font-medium mb-2">Max Price</label>
+          <mat-slider min="0" max="10000" step="100" [(ngModel)]="priceFilter" (change)="applyFilters()"></mat-slider>
+          <span class="text-sm">₹{{priceFilter}}</span>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-2">Min Rating</label>
+          <mat-slider min="0" max="5" step="0.5" [(ngModel)]="ratingFilter" (change)="applyFilters()"></mat-slider>
+          <span class="text-sm">{{ratingFilter}} stars</span>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Accreditation</mat-label>
+            <mat-select [(ngModel)]="accreditationFilter" (selectionChange)="applyFilters()">
+              <mat-option value="">Any</mat-option>
+              <mat-option *ngFor="let acc of accreditations" [value]="acc">{{acc}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
     </div>
-    <mat-table [dataSource]="filteredLabs">
-      <ng-container matColumnDef="test">
-        <mat-header-cell *matHeaderCellDef>Test</mat-header-cell>
-        <mat-cell *matCellDef="let lab">{{getTestDetails(lab)?.name}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="lab">
-        <mat-header-cell *matHeaderCellDef>Lab</mat-header-cell>
-        <mat-cell *matCellDef="let lab">{{lab.name}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
-        <mat-cell *matCellDef="let lab">{{getTestDetails(lab)?.price}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="rating">
-        <mat-header-cell *matHeaderCellDef>Rating</mat-header-cell>
-        <mat-cell *matCellDef="let lab">{{lab.rating}} ⭐</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="tat">
-        <mat-header-cell *matHeaderCellDef>TAT</mat-header-cell>
-        <mat-cell *matCellDef="let lab">{{getTestDetails(lab)?.tat}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="accreditation">
-        <mat-header-cell *matHeaderCellDef>Accreditation</mat-header-cell>
-        <mat-cell *matCellDef="let lab">{{lab.accreditation}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="distance">
-        <mat-header-cell *matHeaderCellDef>Distance (km)</mat-header-cell>
-        <mat-cell *matCellDef="let lab">{{getDistance(lab) | number:'1.1-1'}}</mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" [class.bg-green-100]="selectedLabId === row.id"></mat-row>
-    </mat-table>
-  </div>
-  <div class="w-full md:w-1/2 p-4">
-    <google-map [options]="mapOptions">
-      <map-marker *ngFor="let lab of filteredLabs" [position]="lab.location" [title]="lab.name" (mapClick)="onMarkerClick(lab.id)"></map-marker>
-    </google-map>
+
+    <!-- Results -->
+    <div class="grid lg:grid-cols-2 gap-8">
+      <!-- Lab Cards -->
+      <div class="space-y-6">
+        <mat-card *ngFor="let item of filteredLabs" 
+                  class="shadow-lg hover:shadow-xl transition-all border dark:border-gray-700">
+          <mat-card-header>
+            <mat-card-title class="text-xl font-bold">{{item.lab.name}}</mat-card-title>
+            <mat-card-subtitle class="flex items-center gap-2">
+              <span class="text-yellow-500">Star {{item.lab.rating}}</span>
+              <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full text-xs">
+                {{item.lab.accreditation}}
+              </span>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="p-4">
+            <p class="text-gray-600 dark:text-gray-300">{{item.lab.address}}</p>
+            <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded mt-3">
+              <p class="font-semibold">{{item.test.name}}</p>
+              <p class="text-2xl font-bold text-accent dark:text-green-300">₹{{item.test.price}}</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Ready in {{item.test.tat}}</p>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="accent" class="w-full" 
+                    (click)="bookTest(item.lab.id, item.test.id)">
+              Book Now
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <!-- Map -->
+      <div class="h-96 lg:h-full rounded-2xl overflow-hidden shadow-xl">
+        <google-map [options]="mapOptions" width="100%" height="100%">
+          <map-marker 
+            *ngFor="let item of filteredLabs" 
+            [position]="item.lab.location" 
+            [title]="item.lab.name"
+            (mapClick)="onMarkerClick(item.lab.id)">
+          </map-marker>
+        </google-map>
+      </div>
+    </div>
   </div>
 </div>

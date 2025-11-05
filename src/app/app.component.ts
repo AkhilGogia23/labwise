@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { LayoutService } from './services/layout.service';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet,MatIconModule,CommonModule,MatButtonModule,RouterLink],
@@ -12,7 +13,13 @@ import { RouterLink } from '@angular/router';
 })
 export class AppComponent {
   title = 'labwise';
-    toggleDark() {
-    document.documentElement.classList.toggle('dark');
+ 
+  constructor(public layoutService: LayoutService) {}
+  toggleDarkMode() {
+    this.layoutService.layoutConfig.update((state) => ({
+      ...state,
+      darkTheme: !state.darkTheme,
+    }));
   }
+
 }
