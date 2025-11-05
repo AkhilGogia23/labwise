@@ -1,0 +1,4 @@
+/* Smooth hover for list items */
+mat-list-item {
+  @apply cursor-pointer;
+}
