@@ -1,0 +1,15 @@
+<div class="p-4">
+  <div class="banner bg-gradient-to-r from-green-400 to-blue-500 text-white p-4 rounded-lg shadow-md text-center">
+    <h2 class="text-3xl">10% OFF on All Tests!</h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+    <mat-card *ngFor="let offer of offers" class="hover:scale-105 transition bg-gradient-to-br from-white to-neutral shadow-lg rounded-lg">
+      <mat-card-header>
+        <mat-card-title>{{offer.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{offer.discount}} OFF - {{offer.description}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

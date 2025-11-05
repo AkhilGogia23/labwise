@@ -1,0 +1,65 @@
+<div class="p-4" *ngIf="!showPayment">
+  <h2 class="text-2xl">Book Test</h2>
+  <form class="mt-4">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="booking.userName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input matInput type="number" [(ngModel)]="booking.age">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Contact</mat-label>
+      <input matInput [(ngModel)]="booking.contact">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Date</mat-label>
+      <input matInput type="date" [(ngModel)]="booking.date">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Time</mat-label>
+      <input matInput type="time" [(ngModel)]="booking.time">
+    </mat-form-field>
+  </form>
+  <mat-card class="mt-4">
+    <p>Test: {{test?.name}} at {{lab?.name}}</p>
+    <p>Price: {{test?.price}}</p>
+    <p>Discount: {{discount}} (10% off for first-time)</p>
+    <p>Total: {{total}}</p>
+  </mat-card>
+  <button mat-raised-button color="primary" (click)="confirmBooking()">Confirm</button>
+</div>
+
+<div class="p-4" *ngIf="showPayment">
+  <h2 class="text-2xl">Mock Payment (Razorpay Style)</h2>
+  <mat-radio-group [(ngModel)]="paymentMethod">
+    <mat-radio-button value="upi">UPI</mat-radio-button>
+    <mat-radio-button value="card">Card</mat-radio-button>
+    <mat-radio-button value="net">Net Banking</mat-radio-button>
+  </mat-radio-group>
+  <div *ngIf="paymentMethod === 'upi'">
+    <mat-form-field>
+      <mat-label>UPI ID</mat-label>
+      <input matInput [(ngModel)]="upi" placeholder="example@upi">
+    </mat-form-field>
+  </div>
+  <div *ngIf="paymentMethod === 'card'">
+    <mat-form-field>
+      <mat-label>Card Number</mat-label>
+      <input matInput [(ngModel)]="cardDetails.number" placeholder="1234 5678 9012 3456">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Expiry</mat-label>
+      <input matInput [(ngModel)]="cardDetails.expiry" placeholder="MM/YY">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>CVV</mat-label>
+      <input matInput [(ngModel)]="cardDetails.cvv" placeholder="123">
+    </mat-form-field>
+  </div>
+  <div *ngIf="paymentMethod === 'net'">
+    <p>Select Bank (Mock): HDFC, SBI, etc.</p>
+  </div>
+  <button mat-raised-button color="primary" (click)="pay()">Pay {{total}}</button>
+</div>

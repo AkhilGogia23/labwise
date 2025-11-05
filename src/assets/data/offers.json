@@ -1,0 +1,4 @@
+[
+  { "id": 1, "title": "Full Body Checkup", "discount": "20%", "description": "Comprehensive health package" },
+  { "id": 2, "title": "Diabetes Screening", "discount": "15%", "description": "Blood sugar and related tests" }
+]

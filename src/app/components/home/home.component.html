@@ -1,0 +1,49 @@
+<div class="hero-bg min-h-screen flex items-center">
+  <div class="max-w-5xl mx-auto px-6 text-center">
+    <!-- Hero Title -->
+    <h1 class="text-5xl md:text-6xl font-bold text-primary mb-6 leading-tight">
+      Find the right diagnostic test at the best price.
+    </h1>
+
+    <!-- Search Bar -->
+    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Search Test or Lab</mat-label>
+          <input matInput [(ngModel)]="searchQuery" placeholder="Blood Test, MRI...">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>City</mat-label>
+          <mat-select [(ngModel)]="city">
+            <mat-option *ngFor="let c of cities" [value]="c">{{c}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="h-14 text-lg font-medium"
+                (click)="search()">
+          Search
+        </button>
+      </div>
+
+      <!-- Popular Tests -->
+      <div class="text-left">
+        <h3 class="text-lg font-semibold mb-4 text-gray-700">Popular Tests</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <button *ngFor="let test of popularTests"
+                  mat-stroked-button
+                  class="h-20 text-sm font-medium hover:bg-primary hover:text-white transition"
+                  (click)="searchTest(test.name)">
+            {{ test.name }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <button mat-raised-button color="accent" size="large" class="mt-10 text-lg px-12 py-4"
+            routerLink="/tests">
+      Compare Labs Near You
+    </button>
+  </div>
+</div>

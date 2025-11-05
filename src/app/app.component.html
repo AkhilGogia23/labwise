@@ -1,0 +1,32 @@
+<header class="bg-blue-600 text-white p-4 flex justify-between items-center shadow-lg">
+  <h1 class="text-2xl font-bold">LabWise</h1>
+  
+  <nav class="space-x-4">
+    <button routerLink="/home" class="hover:underline px-2">Home</button>
+    <button routerLink="/tests" class="hover:underline px-2">Tests</button>
+    <button routerLink="/labs" class="hover:underline px-2">Labs</button>
+    <button routerLink="/offers" class="hover:underline px-2">Offers</button>
+    <button [routerLink]="['/profile']" class="hover:underline px-2">Profile</button>
+  </nav>
+  
+  <button (click)="toggleDark()" class="text-xl">🌙</button>
+</header>
+
+<router-outlet></router-outlet>
+
+<footer class="bg-gray-800 text-white p-6 text-center mt-8">
+  <p class="text-sm">
+    <button routerLink="/about" class="hover:underline mx-2">About</button> |
+    <button routerLink="/contact" class="hover:underline mx-2">Contact</button> |
+    <button routerLink="/privacy" class="hover:underline mx-2">Privacy Policy</button>
+  </p>
+</footer>
+
+<!-- Floating Book Button -->
+<button 
+  mat-fab 
+  color="accent" 
+  routerLink="/checkout" 
+  class="fixed bottom-6 right-6 shadow-2xl z-50">
+  <mat-icon>book_online</mat-icon>
+</button>

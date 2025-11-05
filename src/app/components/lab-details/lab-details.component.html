@@ -1,0 +1,31 @@
+<div class="p-4" *ngIf="lab">
+  <mat-card class="mb-4">
+    <mat-card-header>
+      <mat-card-title>{{lab.name}}</mat-card-title>
+      <mat-card-subtitle>{{lab.address}}, {{lab.city}} | Contact: {{lab.contact}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Rating: {{lab.rating}} ⭐ | Accreditation: {{lab.accreditation}}</p>
+    </mat-card-content>
+  </mat-card>
+  <google-map [options]="mapOptions">
+    <map-marker [position]="lab.location" [title]="lab.name"></map-marker>
+  </google-map>
+  <h3 class="mt-4 text-xl">Available Tests</h3>
+  <mat-table [dataSource]="lab.tests">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let test">{{test.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+      <mat-cell *matCellDef="let test">{{test.price}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="tat">
+      <mat-header-cell *matHeaderCellDef>TAT</mat-header-cell>
+      <mat-cell *matCellDef="let test">{{test.tat}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

@@ -1,0 +1,4 @@
+.hero {
+@apply animate-[fadeIn_0.5s_ease-in-out];
+
+}

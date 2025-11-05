@@ -1,0 +1,21 @@
+<div class="p-4">
+  <h2 class="text-2xl">User Profile</h2>
+  <form class="mt-4">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="profile.name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="profile.email">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="saveProfile()">Save</button>
+    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  </form>
+  <h3 class="mt-4 text-xl">Past Bookings</h3>
+  <mat-card *ngFor="let booking of bookings" class="mt-2">
+    <p>Booking ID: {{booking.id}}</p>
+    <p>Test: {{booking.testId}} at Lab {{booking.labId}}</p>
+    <p>Total: {{booking.total}}</p>
+  </mat-card>
+</div>

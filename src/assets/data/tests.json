@@ -1,0 +1,5 @@
+[
+  { "id": 1, "name": "Blood Test", "description": "Complete blood count" },
+  { "id": 2, "name": "MRI", "description": "Magnetic Resonance Imaging" },
+  { "id": 3, "name": "CT Scan", "description": "Computed Tomography" }
+]

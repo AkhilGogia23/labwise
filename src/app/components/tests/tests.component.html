@@ -1,0 +1,52 @@
+<div class="p-4 flex flex-col md:flex-row">
+  <div class="w-full md:w-1/2">
+    <h2 class="text-2xl">Compare Labs for {{testQuery}} in {{city}}</h2>
+    <div class="filters mt-4">
+      <mat-slider min="0" max="10000" step="100" [(ngModel)]="priceFilter" (change)="applyFilters()"></mat-slider> Max Price: {{priceFilter}}
+      <mat-slider min="0" max="5" step="0.5" [(ngModel)]="ratingFilter" (change)="applyFilters()"></mat-slider> Min Rating: {{ratingFilter}}
+      <mat-form-field>
+        <mat-label>Accreditation</mat-label>
+        <mat-select [(ngModel)]="accreditationFilter" (selectionChange)="applyFilters()">
+          <mat-option *ngFor="let acc of accreditations" [value]="acc">{{acc || 'Any'}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-table [dataSource]="filteredLabs">
+      <ng-container matColumnDef="test">
+        <mat-header-cell *matHeaderCellDef>Test</mat-header-cell>
+        <mat-cell *matCellDef="let lab">{{getTestDetails(lab)?.name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="lab">
+        <mat-header-cell *matHeaderCellDef>Lab</mat-header-cell>
+        <mat-cell *matCellDef="let lab">{{lab.name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+        <mat-cell *matCellDef="let lab">{{getTestDetails(lab)?.price}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="rating">
+        <mat-header-cell *matHeaderCellDef>Rating</mat-header-cell>
+        <mat-cell *matCellDef="let lab">{{lab.rating}} ⭐</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="tat">
+        <mat-header-cell *matHeaderCellDef>TAT</mat-header-cell>
+        <mat-cell *matCellDef="let lab">{{getTestDetails(lab)?.tat}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="accreditation">
+        <mat-header-cell *matHeaderCellDef>Accreditation</mat-header-cell>
+        <mat-cell *matCellDef="let lab">{{lab.accreditation}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="distance">
+        <mat-header-cell *matHeaderCellDef>Distance (km)</mat-header-cell>
+        <mat-cell *matCellDef="let lab">{{getDistance(lab) | number:'1.1-1'}}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [class.bg-green-100]="selectedLabId === row.id"></mat-row>
+    </mat-table>
+  </div>
+  <div class="w-full md:w-1/2 p-4">
+    <google-map [options]="mapOptions">
+      <map-marker *ngFor="let lab of filteredLabs" [position]="lab.location" [title]="lab.name" (mapClick)="onMarkerClick(lab.id)"></map-marker>
+    </google-map>
+  </div>
+</div>

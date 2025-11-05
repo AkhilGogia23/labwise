@@ -1,0 +1,6 @@
+:host {
+  @apply block min-h-screen bg-gray-50 text-gray-900;
+}
+.dark {
+  @apply bg-gray-900 text-white;
+}

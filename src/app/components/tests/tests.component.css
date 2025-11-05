@@ -1,0 +1,6 @@
+mat-table {
+  @apply shadow-md rounded-lg overflow-hidden;
+}
+mat-row {
+  @apply hover:bg-gray-100 transition;
+}
