@@ -7,11 +7,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lab-details',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatTableModule, GoogleMapsModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatTableModule, GoogleMapsModule, MatButtonModule,MatIcon],
   templateUrl: './lab-details.component.html',
   styleUrl: './lab-details.component.css'
 })

@@ -1,31 +1,120 @@
-<div class="p-4" *ngIf="lab">
-  <mat-card class="mb-4">
-    <mat-card-header>
-      <mat-card-title>{{lab.name}}</mat-card-title>
-      <mat-card-subtitle>{{lab.address}}, {{lab.city}} | Contact: {{lab.contact}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Rating: {{lab.rating}} ⭐ | Accreditation: {{lab.accreditation}}</p>
-    </mat-card-content>
-  </mat-card>
-  <google-map [options]="mapOptions">
-    <map-marker [position]="lab.location" [title]="lab.name"></map-marker>
-  </google-map>
-  <h3 class="mt-4 text-xl">Available Tests</h3>
-  <mat-table [dataSource]="lab.tests">
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-      <mat-cell *matCellDef="let test">{{test.name}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
-      <mat-cell *matCellDef="let test">{{test.price}}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="tat">
-      <mat-header-cell *matHeaderCellDef>TAT</mat-header-cell>
-      <mat-cell *matCellDef="let test">{{test.tat}}</mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 
+            dark:from-[#0B0C10] dark:via-[#1F2833] dark:to-[#0B0C10] py-12 pt-24">
+
+  <div class="max-w-6xl mx-auto p-6" *ngIf="lab">
+    
+    <!-- Lab Header Card -->
+    <mat-card class="bg-white/95 dark:bg-[#1F2833]/95 backdrop-blur-sm rounded-3xl shadow-xl 
+                     border border-gray-200 dark:border-[#45A29E]/30 mb-8">
+      <mat-card-header class="pb-4">
+        <div mat-card-avatar 
+             class="w-16 h-16 rounded-full bg-gradient-to-br from-[#45A29E] to-[#66FCF1] 
+                    flex items-center justify-center text-white text-2xl font-bold">
+          {{ lab.name.charAt(0) }}
+        </div>
+        <mat-card-title class="text-2xl font-bold text-[#0B0C10] dark:text-[#66FCF1]">
+          {{ lab.name }}
+        </mat-card-title>
+        <mat-card-subtitle class="text-gray-600 dark:text-[#C5C6C7] mt-1">
+          {{ lab.address }}, {{ lab.city }} 
+          <span class="inline-block mx-2">•</span>
+          Contact: {{ lab.contact }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content class="flex flex-wrap gap-4 text-sm">
+        <div class="flex items-center gap-1 text-yellow-600 dark:text-[#FFD369]">
+          <mat-icon>star</mat-icon>
+          <span class="font-semibold">{{ lab.rating }}</span>
+          <span class="text-gray-500 dark:text-gray-400">(4.7/5)</span>
+        </div>
+        <div class="flex items-center gap-1 text-green-600 dark:text-green-400">
+          <mat-icon>verified</mat-icon>
+          <span class="font-medium">{{ lab.accreditation }}</span>
+        </div>
+        <div class="flex items-center gap-1 text-indigo-600 dark:text-indigo-400">
+          <mat-icon>schedule</mat-icon>
+          <span>Open 24 hrs</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Map -->
+    <div class="h-96 rounded-3xl overflow-hidden shadow-xl mb-8 border border-gray-300 dark:border-[#45A29E]/30">
+      <google-map [options]="mapOptions" width="100%" height="100%">
+        <map-marker 
+          [position]="lab.location" 
+          [title]="lab.name"
+          [icon]="'https://maps.google.com/mapfiles/ms/icons/teal-dot.png'">
+        </map-marker>
+      </google-map>
+    </div>
+
+    <!-- Available Tests -->
+    <h3 class="text-2xl font-bold text-[#0B0C10] dark:text-[#66FCF1] mb-6 flex items-center gap-2">
+      <mat-icon>biotech</mat-icon>
+      Available Tests
+    </h3>
+
+    <mat-card class="bg-white/95 dark:bg-[#1F2833]/95 backdrop-blur-sm rounded-3xl shadow-lg 
+                     border border-gray-200 dark:border-[#45A29E]/30">
+      <mat-card-content>
+        <div class="overflow-x-auto">
+          <table mat-table [dataSource]="lab.tests" class="w-full">
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef class="text-left font-bold text-[#0B0C10] dark:text-[#66FCF1]">
+                Test Name
+              </th>
+              <td mat-cell *matCellDef="let test" class="text-gray-700 dark:text-[#C5C6C7]">
+                {{ test.name }}
+              </td>
+            </ng-container>
+
+            <!-- Price Column -->
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef class="text-center font-bold text-[#0B0C10] dark:text-[#66FCF1]">
+                Price
+              </th>
+              <td mat-cell *matCellDef="let test" class="text-center font-bold text-[#45A29E] dark:text-[#66FCF1]">
+                ₹{{ test.price }}
+              </td>
+            </ng-container>
+
+            <!-- TAT Column -->
+            <ng-container matColumnDef="tat">
+              <th mat-header-cell *matHeaderCellDef class="text-right font-bold text-[#0B0C10] dark:text-[#66FCF1]">
+                Turnaround Time
+              </th>
+              <td mat-cell *matCellDef="let test" class="text-right text-green-600 dark:text-green-400">
+                {{ test.tat }}
+              </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let test">
+                <button mat-raised-button color="primary" class="text-sm">
+                  Book Now
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+                class="hover:bg-gray-50 dark:hover:bg-[#1F2833]/50 transition"></tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- CTA -->
+    <div class="text-center mt-10">
+      <button mat-raised-button color="accent" class="px-8 py-3 text-lg font-semibold">
+        Book Appointment
+      </button>
+    </div>
+  </div>
 </div>

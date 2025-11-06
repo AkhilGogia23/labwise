@@ -1,0 +1,11 @@
+/* Dark mode table */
+.dark .mat-mdc-table {
+  background-color: transparent !important;
+}
+.dark .mat-mdc-header-cell,
+.dark .mat-mdc-cell {
+  color: #C5C6C7 !important;
+}
+.dark .mat-mdc-row:hover {
+  background-color: rgba(102, 252, 241, 0.1) !important;
+}
