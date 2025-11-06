@@ -31,6 +31,7 @@ interface Booking {
   labId: number;
   testId: number;
   userName: string;
+  email: string;
   age: number;
   contact: string;
   date: string;
@@ -68,6 +69,7 @@ export class CheckoutComponent implements OnInit {
     userName: '',
     age: 0,
     contact: '',
+    email: '',
     date: '',
     time: ''
   };

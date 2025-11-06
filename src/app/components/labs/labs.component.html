@@ -35,7 +35,7 @@
                hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] 
                border border-gray-100 dark:border-gray-700"
       >
-        <mat-card-header class="pb-3">
+        <mat-card-header class="pb-3 text-white">
           <mat-card-title class="text-xl font-bold text-primary dark:text-white flex items-center justify-between">
             {{ lab.name }}
             <span class="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-full">
@@ -47,7 +47,7 @@
           </mat-card-subtitle>
         </mat-card-header>
 
-        <mat-card-content class="space-y-2">
+        <mat-card-content class="space-y-2 text-white">
           <p class="text-gray-600 dark:text-gray-300">
             📍 {{ lab.address }}, {{ lab.city }}
           </p>
@@ -56,11 +56,11 @@
           </p>
         </mat-card-content>
 
-        <mat-card-actions class="p-4">
+        <mat-card-actions class="p-4 text-white">
           <button 
             mat-raised-button 
             color="accent" 
-            class="w-full font-semibold"
+            class="w-full font-semibold "
             (click)="viewDetails(lab.id)"
           >
             View Details

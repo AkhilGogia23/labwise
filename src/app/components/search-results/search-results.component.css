@@ -1,0 +1,4 @@
+/* Force dark mode text colors */
+.dark .text-primary { color: #66FCF1 !important; }
+.dark .text-accent { color: #45A29E !important; }
+.dark .mat-mdc-card { background-color: rgba(31, 41, 55, 0.95) !important; }

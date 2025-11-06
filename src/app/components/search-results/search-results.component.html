@@ -1,44 +1,108 @@
-<div class="max-w-6xl mx-auto p-6">
-  <h2 class="text-3xl font-bold text-primary mb-6">
-    Search Results for "{{query}}" in {{city}}
-  </h2>
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 
+            dark:from-[#0B0C10] dark:via-[#1F2833] dark:to-[#0B0C10] py-12 pt-24">
 
-  <div *ngIf="loading" class="flex justify-center py-20">
-    <mat-spinner diameter="60"></mat-spinner>
-  </div>
+  <div class="max-w-6xl mx-auto p-6">
+    <h2 class="text-3xl font-bold text-[#0B0C10] dark:text-[#66FCF1] mb-6">
+      Search Results for "{{ query }}" in {{ city }}
+    </h2>
 
-  <div *ngIf="!loading" class="space-y-6">
-    <!-- Fake Lab Cards -->
-    <mat-card class="shadow-lg hover:shadow-xl transition">
-      <mat-card-header>
-        <mat-card-title>City Diagnostics</mat-card-title>
-        <mat-card-subtitle>⭐ 4.7 • NABL Accredited</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p><strong>Blood Test</strong> • ₹450 • Ready in 2 hrs</p>
-        <p class="text-gray-600 mt-2">Marine Drive, Mumbai</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-stroked-button color="primary">View Details</button>
-      </mat-card-actions>
-    </mat-card>
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="flex justify-center py-20">
+      <mat-spinner diameter="60"></mat-spinner>
+    </div>
 
-    <mat-card class="shadow-lg hover:shadow-xl transition">
-      <mat-card-header>
-        <mat-card-title>HealthPlus Labs</mat-card-title>
-        <mat-card-subtitle>⭐ 4.5 • ISO Certified</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p><strong>Blood Test</strong> • ₹400 • Ready in 3 hrs</p>
-        <p class="text-gray-600 mt-2">Andheri East, Mumbai</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-stroked-button color="primary">View Details</button>
-      </mat-card-actions>
-    </mat-card>
+    <!-- Results -->
+    <div *ngIf="!loading" class="space-y-6">
+      
+      <!-- Lab Card 1 -->
+      <mat-card class="bg-white/95 dark:bg-[#1F2833]/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 
+                       border border-gray-200 dark:border-[#45A29E]/30 text-white">
+        <mat-card-header class="pb-3">
+          <mat-card-title class="text-xl font-bold text-[#0B0C10] dark:text-[#66FCF1]">
+            City Diagnostics
+          </mat-card-title>
+          <mat-card-subtitle class="flex items-center gap-1 text-yellow-600 dark:text-[#FFD369] font-medium">
+            Star 4.7 • NABL Accredited
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="space-y-1">
+          <p class="font-semibold text-[#0B0C10] dark:text-[#C5C6C7]">
+            <strong>Blood Test</strong> • ₹450 • Ready in 2 hrs
+          </p>
+          <p class="text-sm text-gray-600 dark:text-[#C5C6C7] mt-2">
+            Location: Marine Drive, Mumbai
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="p-4">
+          <button mat-stroked-button 
+                  class="font-medium text-[#45A29E] dark:text-[#66FCF1] 
+                         border-[#45A29E] dark:border-[#66FCF1] 
+                         hover:bg-[#45A29E]/10 dark:hover:bg-[#66FCF1]/20">
+            View Details
+          </button>
+        </mat-card-actions>
+      </mat-card>
 
-    <div class="text-center py-10 text-gray-500">
-      <p>More results coming soon when backend is ready...</p>
+      <!-- Lab Card 2 -->
+      <mat-card class="bg-white/95 dark:bg-[#1F2833]/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 
+                       border border-gray-200 dark:border-[#45A29E]/30 text-white">
+        <mat-card-header class="pb-3">
+          <mat-card-title class="text-xl font-bold text-[#0B0C10] dark:text-[#66FCF1]">
+            HealthPlus Labs
+          </mat-card-title>
+          <mat-card-subtitle class="flex items-center gap-1 text-yellow-600 dark:text-[#FFD369] font-medium">
+            Star 4.5 • ISO Certified
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="space-y-1">
+          <p class="font-semibold text-[#0B0C10] dark:text-[#C5C6C7]">
+            <strong>Blood Test</strong> • ₹400 • Ready in 3 hrs
+          </p>
+          <p class="text-sm text-gray-600 dark:text-[#C5C6C7] mt-2">
+            Location: Andheri East, Mumbai
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="p-4">
+          <button mat-stroked-button 
+                  class="font-medium text-[#45A29E] dark:text-[#66FCF1] 
+                         border-[#45A29E] dark:border-[#66FCF1] 
+                         hover:bg-[#45A29E]/10 dark:hover:bg-[#66FCF1]/20">
+            View Details
+          </button>
+        </mat-card-actions>
+      </mat-card>
+       <mat-card class="bg-white/95 dark:bg-[#1F2833]/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 
+                       border border-gray-200 dark:border-[#45A29E]/30 text-white">
+        <mat-card-header class="pb-3">
+          <mat-card-title class="text-xl font-bold text-[#0B0C10] dark:text-[#66FCF1]">
+            HealthPlus Labs
+          </mat-card-title>
+          <mat-card-subtitle class="flex items-center gap-1 text-yellow-600 dark:text-[#FFD369] font-medium">
+            Star 4.5 • ISO Certified
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="space-y-1">
+          <p class="font-semibold text-[#0B0C10] dark:text-[#C5C6C7]">
+            <strong>Blood Test</strong> • ₹400 • Ready in 3 hrs
+          </p>
+          <p class="text-sm text-gray-600 dark:text-[#C5C6C7] mt-2">
+            Location: Andheri East, Mumbai
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="p-4">
+          <button mat-stroked-button 
+                  class="font-medium text-[#45A29E] dark:text-[#66FCF1] 
+                         border-[#45A29E] dark:border-[#66FCF1] 
+                         hover:bg-[#45A29E]/10 dark:hover:bg-[#66FCF1]/20">
+            View Details
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+      <!-- Coming Soon -->
+      <div class="text-center py-10 text-gray-500 dark:text-gray-400">
+        <p class="text-sm">More results coming soon when backend is ready...</p>
+      </div>
     </div>
   </div>
 </div>
