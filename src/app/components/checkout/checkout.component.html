@@ -1,65 +1,186 @@
-<div class="p-4" *ngIf="!showPayment">
-  <h2 class="text-2xl">Book Test</h2>
-  <form class="mt-4">
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="booking.userName">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Age</mat-label>
-      <input matInput type="number" [(ngModel)]="booking.age">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Contact</mat-label>
-      <input matInput [(ngModel)]="booking.contact">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Date</mat-label>
-      <input matInput type="date" [(ngModel)]="booking.date">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Time</mat-label>
-      <input matInput type="time" [(ngModel)]="booking.time">
-    </mat-form-field>
-  </form>
-  <mat-card class="mt-4">
-    <p>Test: {{test?.name}} at {{lab?.name}}</p>
-    <p>Price: {{test?.price}}</p>
-    <p>Discount: {{discount}} (10% off for first-time)</p>
-    <p>Total: {{total}}</p>
-  </mat-card>
-  <button mat-raised-button color="primary" (click)="confirmBooking()">Confirm</button>
-</div>
+<div class="min-h-screen bg-gradient-to-br from-teal-50 via-white to-indigo-50 
+            dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 pt-24 ">
 
-<div class="p-4" *ngIf="showPayment">
-  <h2 class="text-2xl">Mock Payment (Razorpay Style)</h2>
-  <mat-radio-group [(ngModel)]="paymentMethod">
-    <mat-radio-button value="upi">UPI</mat-radio-button>
-    <mat-radio-button value="card">Card</mat-radio-button>
-    <mat-radio-button value="net">Net Banking</mat-radio-button>
-  </mat-radio-group>
-  <div *ngIf="paymentMethod === 'upi'">
-    <mat-form-field>
-      <mat-label>UPI ID</mat-label>
-      <input matInput [(ngModel)]="upi" placeholder="example@upi">
-    </mat-form-field>
+  <div class="max-w-4xl mx-auto px-6">
+    <h1 class="text-3xl md:text-4xl font-bold text-center text-primary dark:text-teal-300 mb-10">
+      Secure Checkout
+    </h1>
+
+    <mat-horizontal-stepper linear #stepper>
+      
+      <!-- Step 1: Booking Details -->
+     <mat-step>
+    <ng-template matStepLabel>
+      <div class="flex items-center gap-2">
+        <mat-icon>person</mat-icon>
+        <span>Patient Details</span>
+      </div>
+    </ng-template>
+
+    <mat-card class="p-6 mb-6 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl shadow-lg">
+      <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-5">Enter Patient Information</h2>
+      
+      <form #bookingForm="ngForm" class="grid md:grid-cols-2 gap-5">
+        <!-- All your inputs with ngModel and required -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Full Name</mat-label>
+          <input matInput [(ngModel)]="booking.userName" name="name" required #name="ngModel">
+          <mat-error *ngIf="name.invalid && name.touched">Name is required</mat-error>
+        </mat-form-field>
+        <!-- ... repeat for age, contact, date, time ... -->
+      </form>
+    </mat-card>
+
+    <div class="flex justify-end gap-3">
+      <button mat-stroked-button matStepperNext 
+              [disabled]="bookingForm.invalid">
+        Next <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </mat-step>
+
+      <!-- Step 2: Order Summary -->
+      <mat-step>
+        <ng-template matStepLabel>
+          <div class="flex items-center gap-2">
+            <mat-icon>receipt_long</mat-icon>
+            <span>Order Summary</span>
+          </div>
+        </ng-template>
+
+        <mat-card class="p-6 mb-6 bg-gradient-to-r from-teal-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 rounded-2xl">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Booking Summary</h3>
+          
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <span class="text-gray-600 dark:text-gray-400">Test</span>
+              <span class="font-medium">{{test?.name}}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600 dark:text-gray-400">Lab</span>
+              <span class="font-medium">{{lab?.name}}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600 dark:text-gray-400">Location</span>
+              <span class="font-medium">{{lab?.address}}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600 dark:text-gray-400">Original Price</span>
+              <span class="line-through text-gray-500">₹{{test?.price}}</span>
+            </div>
+            <div class="flex justify-between text-green-600 dark:text-green-400" *ngIf="discount > 0">
+              <span>First-Time Discount (10%)</span>
+              <span>-₹{{discount}}</span>
+            </div>
+            <mat-divider class="my-3"></mat-divider>
+            <div class="flex justify-between text-lg font-bold text-primary dark:text-teal-300">
+              <span>Total Amount</span>
+              <span>₹{{total}}</span>
+            </div>
+          </div>
+        </mat-card>
+
+        <div class="flex justify-between">
+          <button mat-stroked-button matStepperPrevious>
+            <mat-icon>arrow_back</mat-icon> Back
+          </button>
+          <button mat-raised-button color="accent" matStepperNext>
+            Proceed to Payment <mat-icon>payment</mat-icon>
+          </button>
+        </div>
+      </mat-step>
+
+      <!-- Step 3: Payment -->
+      <mat-step>
+        <ng-template matStepLabel>
+          <div class="flex items-center gap-2">
+            <mat-icon>lock</mat-icon>
+            <span>Payment</span>
+          </div>
+        </ng-template>
+
+        <mat-card class="p-6 mb-6 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl shadow-lg">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-5 flex items-center gap-2">
+            <mat-icon color="primary">security</mat-icon>
+            Secure Payment
+          </h3>
+
+          <mat-radio-group [(ngModel)]="paymentMethod" class="flex flex-col gap-3 mb-5">
+            <mat-radio-button value="upi" class="text-gray-700 dark:text-gray-300">
+              <div class="flex items-center gap-2">
+                <mat-icon>account_balance_wallet</mat-icon>
+                <span>UPI (Google Pay, PhonePe, etc.)</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="card">
+              <div class="flex items-center gap-2">
+                <mat-icon>credit_card</mat-icon>
+                <span>Credit / Debit Card</span>
+              </div>
+            </mat-radio-button>
+            <mat-radio-button value="net">
+              <div class="flex items-center gap-2">
+                <mat-icon>account_balance</mat-icon>
+                <span>Net Banking</span>
+              </div>
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <!-- UPI -->
+          <div *ngIf="paymentMethod === 'upi'" class="mt-4">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>UPI ID</mat-label>
+              <input matInput [(ngModel)]="upi" placeholder="yourname@upi" required>
+              <mat-hint>e.g., yournameoksbi</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <!-- Card -->
+          <div *ngIf="paymentMethod === 'card'" class="grid md:grid-cols-2 gap-4 mt-4">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Card Number</mat-label>
+              <input matInput [(ngModel)]="cardDetails.number" placeholder="1234 5678 9012 3456" maxlength="19">
+              <mat-icon matSuffix>credit_card</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Expiry</mat-label>
+              <input matInput [(ngModel)]="cardDetails.expiry" placeholder="MM/YY">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="md:col-span-2">
+              <mat-label>CVV</mat-label>
+              <input matInput [(ngModel)]="cardDetails.cvv" type="password" maxlength="3">
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <!-- Net Banking -->
+          <div *ngIf="paymentMethod === 'net'" class="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+            <p class="text-sm text-gray-600 dark:text-gray-400">Select your bank:</p>
+            <div class="grid grid-cols-3 gap-2 mt-2 text-xs">
+              <button mat-stroked-button class="text-left">HDFC</button>
+              <button mat-stroked-button class="text-left">SBI</button>
+              <button mat-stroked-button class="text-left">ICICI</button>
+              <button mat-stroked-button class="text-left">Axis</button>
+              <button mat-stroked-button class="text-left">PNB</button>
+              <button mat-stroked-button class="text-left">Kotak</button>
+            </div>
+          </div>
+        </mat-card>
+
+        <div class="flex justify-between items-center">
+          <button mat-stroked-button matStepperPrevious>
+            <mat-icon>arrow_back</mat-icon> Back
+          </button>
+          <button 
+            mat-raised-button 
+            color="primary" 
+            class="text-lg font-semibold px-8"
+            (click)="pay()"
+          >
+            Pay ₹{{total}} <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
   </div>
-  <div *ngIf="paymentMethod === 'card'">
-    <mat-form-field>
-      <mat-label>Card Number</mat-label>
-      <input matInput [(ngModel)]="cardDetails.number" placeholder="1234 5678 9012 3456">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Expiry</mat-label>
-      <input matInput [(ngModel)]="cardDetails.expiry" placeholder="MM/YY">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>CVV</mat-label>
-      <input matInput [(ngModel)]="cardDetails.cvv" placeholder="123">
-    </mat-form-field>
-  </div>
-  <div *ngIf="paymentMethod === 'net'">
-    <p>Select Bank (Mock): HDFC, SBI, etc.</p>
-  </div>
-  <button mat-raised-button color="primary" (click)="pay()">Pay {{total}}</button>
 </div>

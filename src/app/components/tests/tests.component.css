@@ -7,3 +7,36 @@
 [animation] {
   animation: fadeIn 0.5s ease-out forwards;
 }
+/* tests.component.css */
+:host {
+  display: block;
+}
+
+/* Force dark mode text colors */
+.dark .dark\:text-white { color: #ffffff !important; }
+.dark .dark\:text-gray-300 { color: #d1d5db !important; }
+.dark .dark\:text-gray-400 { color: #9ca3af !important; }
+.dark .dark\:text-green-400 { color: #34d399 !important; }
+.dark .dark\:text-teal-400 { color: #5eead4 !important; }
+.dark .dark\:text-yellow-400 { color: #fbbf24 !important; }
+
+/* Card background in dark mode */
+.dark .bg-white\/95 {
+  background-color: rgba(31, 41, 55, 0.95) !important; /* gray-800 */
+}
+.dark .border-gray-100 {
+  border-color: #374151 !important; /* gray-700 */
+}
+
+/* Input & Select in dark */
+.dark .mat-mdc-form-field .mdc-text-field__input,
+.dark .mat-mdc-select-value {
+  color: #f3f4f6 !important; /* gray-100 */
+}
+.dark .mat-mdc-form-field .mdc-floating-label {
+  color: #9ca3af !important;
+}
+.dark .mat-mdc-form-field .mdc-line-ripple::before,
+.dark .mat-mdc-form-field .mdc-line-ripple::after {
+  border-bottom-color: #4b5563 !important;
+}

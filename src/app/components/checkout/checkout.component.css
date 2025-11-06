@@ -1,0 +1,15 @@
+:host ::ng-deep .mat-stepper-horizontal {
+  margin-top: 20px;
+}
+
+:host ::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #10b981 !important;
+}
+
+:host ::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #e5e7eb;
+}
+
+:host ::ng-deep .mat-stepper-label-position-bottom .mat-stepper-horizontal-line {
+  border-top-color: #10b981;
+}

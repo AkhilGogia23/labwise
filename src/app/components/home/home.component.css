@@ -12,3 +12,38 @@
 .dark .hero::before {
   @apply bg-black/40;
 }
+/* Make Material form labels and input text darker */
+.mat-mdc-form-field,
+.mat-mdc-select {
+  color: #0B0C10 !important; /* dark black text */
+}
+
+.mat-mdc-form-field-label {
+  color: #0B0C10 !important; /* label color */
+  opacity: 1 !important;     /* remove fade effect */
+}
+
+.mat-mdc-input-element {
+  color: #0B0C10 !important; /* input text color */
+}
+
+.mat-mdc-select-value,
+.mat-mdc-select-arrow {
+  color: #0B0C10 !important; /* dropdown color */
+}
+
+/* Optional: increase divider contrast under fields */
+.mat-mdc-form-field-underline {
+  background-color: #0B0C10 !important;
+}
+
+/* Button contrast fix */
+button[mat-raised-button] {
+  background-color: #0B0C10 !important;
+  color: #FFFFFF !important;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #45A29E !important;
+  color: #0B0C10 !important;
+}

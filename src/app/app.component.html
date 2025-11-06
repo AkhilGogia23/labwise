@@ -1,18 +1,58 @@
-<header class="bg-blue-600 text-white p-4 flex justify-between items-center shadow-lg">
-  <h1 class="text-2xl font-bold">LabWise</h1>
-  
-  <nav class="space-x-4">
-    <button [routerLink]="['/home']" class="hover:underline px-2">Home</button>
-    <button [routerLink]="['/tests']" class="hover:underline px-2">Tests</button>
-    <button [routerLink]="['/labs']" class="hover:underline px-2">Labs</button>
-    <button [routerLink]="['/offers']" class="hover:underline px-2">Offers</button>
-    <button [routerLink]="['/profile']" class="hover:underline px-2">Profile</button>
+<header
+  class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-4 bg-transparent text-white"
+>
+  <!-- Logo / Title -->
+  <h1 class="text-3xl font-bold text-[#dbdbdb]">Diagnovate</h1>
+
+  <!-- Transparent Nav -->
+  <nav class="flex space-x-6">
+    <button
+      [routerLink]="['/home']"
+      class="px-3 py-1  font-semibold transition-all duration-300 
+         hover:bg-[#0B0C10] hover:text-[#FFFFFF] rounded-md"
+    >
+      Home
+    </button>
+    <button
+      [routerLink]="['/tests']"
+      class="px-3 py-1  font-semibold transition-all duration-300 
+         hover:bg-[#0B0C10] hover:text-[#FFFFFF] rounded-md"
+    >
+      Tests
+    </button>
+    <button
+      [routerLink]="['/labs']"
+      class="px-3 py-1  font-semibold transition-all duration-300 
+         hover:bg-[#0B0C10] hover:text-[#FFFFFF] rounded-md"
+    >
+      Labs
+    </button>
+    <button
+      [routerLink]="['/offers']"
+      class="px-3 py-1  font-semibold transition-all duration-300 
+         hover:bg-[#0B0C10] hover:text-[#FFFFFF] rounded-md"
+    >
+      Offers
+    </button>
+    <button
+      [routerLink]="['/profile']"
+      class="px-3 py-1  font-semibold transition-all duration-300 
+         hover:bg-[#0B0C10] hover:text-[#FFFFFF] rounded-md"
+    >
+      Profile
+    </button>
   </nav>
-<button (click)="toggleDarkMode()" class="text-xl">🌙</button>
+
+  <!-- Dark Mode Toggle -->
+  <button (click)="toggleDarkMode()" class="text-2xl hover:text-[#66FCF1] transition-all duration-300">
+    🌙
+  </button>
 </header>
 
+
+
 <router-outlet></router-outlet>
-<footer class="bg-gray-800 text-white p-6 text-center">
+<footer class="bg-gray-900 text-white p-6 text-center">
   <p class="text-sm">
     <button routerLink="/about" class="hover:underline mx-2">About</button> |
     <button routerLink="/contact" class="hover:underline mx-2">Contact</button> |

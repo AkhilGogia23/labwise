@@ -1,61 +1,63 @@
-<!-- <div class="hero-bg min-h-screen flex items-center">
-  <div class="max-w-5xl mx-auto px-6 text-center">
-    
-    <h1 class="text-5xl md:text-6xl font-bold text-primary mb-6 leading-tight">
-      Find the right diagnostic test at the best price.
-    </h1>
+    <!-- <div class="hero-bg min-h-screen flex items-center">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        
+        <h1 class="text-5xl md:text-6xl font-bold text-primary mb-6 leading-tight">
+          Find the right diagnostic test at the best price.
+        </h1>
 
-   
-    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-4xl mx-auto">
-      <div class="grid md:grid-cols-3 gap-4 mb-8">
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Search Test or Lab</mat-label>
-          <input matInput [(ngModel)]="searchQuery" placeholder="Blood Test, MRI...">
-        </mat-form-field>
+      
+        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-3 gap-4 mb-8">
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>Search Test or Lab</mat-label>
+              <input matInput [(ngModel)]="searchQuery" placeholder="Blood Test, MRI...">
+            </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>City</mat-label>
-          <mat-select [(ngModel)]="city">
-            <mat-option *ngFor="let c of cities" [value]="c">{{c}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+            <mat-form-field appearance="fill" class="w-full">
+              <mat-label>City</mat-label>
+              <mat-select [(ngModel)]="city">
+                <mat-option *ngFor="let c of cities" [value]="c">{{c}}</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-        <button mat-raised-button color="primary" class="h-14 text-lg font-medium"
-                (click)="search()">
-          Search
+            <button mat-raised-button color="primary" class="h-14 text-lg font-medium"
+                    (click)="search()">
+              Search
+            </button>
+          </div>
+
+          <div class="text-left">
+            <h3 class="text-lg font-semibold mb-4 text-gray-700">Popular Tests</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <button *ngFor="let test of popularTests"
+                      mat-stroked-button
+                      class="h-20 text-sm font-medium hover:bg-primary hover:text-white transition"
+                      (click)="searchTest(test.name)">
+                {{ test.name }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <button mat-raised-button color="accent" size="large" class="mt-10 text-lg px-12 py-4"
+                routerLink="/tests">
+          Compare Labs Near You
         </button>
       </div>
+    </div> -->
 
-      <div class="text-left">
-        <h3 class="text-lg font-semibold mb-4 text-gray-700">Popular Tests</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <button *ngFor="let test of popularTests"
-                  mat-stroked-button
-                  class="h-20 text-sm font-medium hover:bg-primary hover:text-white transition"
-                  (click)="searchTest(test.name)">
-            {{ test.name }}
-          </button>
-        </div>
-      </div>
-    </div>
-
-
-    <button mat-raised-button color="accent" size="large" class="mt-10 text-lg px-12 py-4"
-            routerLink="/tests">
-      Compare Labs Near You
-    </button>
-  </div>
-</div> -->
-
-<div class="hero min-h-screen flex items-center justify-center relative overflow-hidden">
+   <div class="hero min-h-screen flex items-center justify-center relative overflow-hidden">
   <!-- Background Image -->
-  <div class="absolute inset-0 z-0">
+  <div 
+    class="absolute inset-0 bg-cover bg-center z-0"
+    style="background-image: url('assets/images/heroo.jpg');"
+  >
+    <!-- Dark overlay for readability -->
   
-    <!-- Dark Overlay for Text Readability -->
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/70 via-black/50 to-green-900/70"></div>
   </div>
 
-  <!-- Content (on top) -->
+  <!-- Foreground content -->
   <div class="relative z-10 max-w-4xl w-full px-6 text-center text-white">
     <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-lg">
       Find the Right Test.<br><span class="text-green-400">At the Best Price.</span>
@@ -66,39 +68,38 @@
     </p>
 
     <!-- Search Card -->
-    <div class="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 max-w-3xl mx-auto">
+    <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 max-w-3xl mx-auto text-gray-900">
       <div class="grid md:grid-cols-3 gap-4">
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label class="text-gray-700 dark:text-gray-300">Search Test or Lab</mat-label>
+          <mat-label>Search Test or Lab</mat-label>
           <input 
             matInput 
             [(ngModel)]="searchQuery" 
             placeholder="Blood Test, MRI, City Diagnostics"
-            class="text-gray-900 dark:text-white"
             (keyup.enter)="search()"
           >
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label class="text-gray-700 dark:text-gray-300">City</mat-label>
+          <mat-label>City</mat-label>
           <mat-select [(ngModel)]="city">
-            <mat-option *ngFor="let c of cities" [value]="c">{{c}}</mat-option>
+            <mat-option *ngFor="let c of cities" [value]="c">{{ c }}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <button 
           mat-raised-button 
           color="accent" 
-          class="h-14 text-lg font-semibold"
+          class="h-14 text-lg font-semibold text-white bg-[#0B0C10] hover:bg-[#45A29E] transition-colors duration-300"
           (click)="search()"
         >
           Search Now
         </button>
       </div>
-    </div>
 
-    <p class="mt-8 text-lg drop-shadow">
-      Trusted by <strong>50,000+</strong> patients across India
-    </p>
+      <p class="mt-8 text-lg text-gray-800 drop-shadow">
+        Trusted by <strong class="text-black">50,000+</strong> patients across India
+      </p>
+    </div>
   </div>
 </div>
