@@ -1,6 +1,6 @@
 [build]
   command = "npm install && npm run build"
-  publish = "dist/labwise"
+  publish = "dist/labwise/browser"
 
 [build.environment]
   NODE_VERSION = "18"
